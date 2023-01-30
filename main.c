@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:54:46 by sschelti          #+#    #+#             */
-/*   Updated: 2023/01/27 17:47:04 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/01/30 16:59:48 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,26 @@ void	hook(void *param)
 		mlx_close_window(mlx);
 }
 
-void	make_window(void)
+int	make_window(void)
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	uint32_t	colour;
 
-	mlx = mlx_init(800, 800, "fractol", true);
+	mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
 	if (!mlx)
 		exit(EXIT_FAILURE);
-	img = mlx_new_image(mlx, 800, 800);
+	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!img)
 		exit(EXIT_FAILURE);
-	colour = get_colour(0, 0, 255, 255);
-	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
-	mlx_image_to_window(mlx, img, 128, 128);
-	mandelbrot(mlx, img, 800, 800);
+	ft_memset(img->pixels, (char)255, WIDTH * HEIGHT * sizeof(int));
+	mandelbrot(img);
+	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_loop_hook(mlx, &hook, mlx);
 	mlx_loop(mlx);
+	return(EXIT_SUCCESS);
 }
 
 int	main(void)
 {
-	make_window();
+	return (make_window());
 }

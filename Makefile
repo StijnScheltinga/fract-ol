@@ -1,5 +1,5 @@
 SOURCES	=	main.c utils.c mandelbrot.c
-OBJECTS	=	$(SOURCES:.c=.o)
+OBJECTS	=	$(addprefix $(BUILD)/, $(SOURCES:.c=.o))
 NAME	=	fractol
 CC		=	gcc
 FLAGS	=	-Wall -Werror -Wextra
@@ -16,20 +16,23 @@ $(NAME): $(OBJECTS) $(LIBS)
 	$(CC) $(FLAGS) $(OBJECTS) $(LIBS) -o $(NAME)
 
 $(LIBS):
-	$(MAKE) -C $(MLX)
-	$(MAKE) -C $(LIBFT)
+	@$(MAKE) -C $(MLX) -s
+	@$(MAKE) -C $(LIBFT) -s
 
-%.o: %.c
-	$(CC) -c $< -o $@
+$(BUILD)/%.o: %.c | $(BUILD)
+	@$(CC) -c $< -o $@
+
+$(BUILD):
+	@mkdir -p build
 
 clean:
-	rm -rf $(OBJECTS)
-	$(MAKE) -C $(MLX) clean
-	$(MAKE) -C $(LIBFT) clean
+	@rm -rf $(OBJECTS) $(BUILD)
+	@$(MAKE) -C $(MLX) clean -s
+	@$(MAKE) -C $(LIBFT) clean -s
 
 fclean:
-	rm -rf $(NAME) $(OBJECTS)
-	$(MAKE) -C $(MLX) fclean
-	$(MAKE) -C $(LIBFT) fclean
+	@rm -rf $(NAME) $(OBJECTS) $(BUILD)
+	@$(MAKE) -C $(MLX) fclean -s 
+	@$(MAKE) -C $(LIBFT) fclean -s
 
 re:	fclean all

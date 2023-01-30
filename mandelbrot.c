@@ -6,34 +6,70 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:37:30 by sschelti          #+#    #+#             */
-/*   Updated: 2023/01/27 18:16:05 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/01/30 16:59:36 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	mandelbrot(mlx_t *mlx, mlx_image_t *img, int width, int height)
+void	calculate_absolute(mlx_image_t *img, int x, int y)
 {
-	int				x;
-	int				y;
-	double			cy;
 	double			cx;
-	double complex	z;
+	double			cy;
 	double complex	c;
+	double complex	z;
+	int				i;
+
+	cx = x * ((double)4 / WIDTH) - 2;
+	cy = y * ((double)4 / HEIGHT) - 2;
+	c = cx + cy * I;
+	z = 0 + 0 * I;
+	i = 0;
+	while (i != MAX_ITERATIONS)
+	{
+		z = (z * z) + c;
+		i++;
+	}
+	if (cabs(z) < 2)
+		mlx_put_pixel(img, x, y, get_colour(255, 0, 0, 255));
+	else
+		mlx_put_pixel(img, x, y, get_colour(0, 0, 0, 0));
+}
+
+void	mandelbrot(mlx_image_t *img)
+{
+	int	x;
+	int	y;
 
 	x = 0;
 	y = 0;
-	z = 0;
-	while (x != width)
+	while (x != WIDTH)
 	{
-		cx = x * 4 / width - 2;
-		while (y != height)
+		while (y != HEIGHT)
 		{
-			cy = y * 4 / height - 2;
-			c = cx + cy * I;
-			z = z * z + c;
+			calculate_absolute(img, x, y);
 			y++;
 		}
+		y = 0;
+		x++;
+	}
+}
+
+void	set_background(mlx_image_t *img)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (x != WIDTH)
+	{
+		while (y != HEIGHT)
+		{
+			mlx_put_pixel(img, x, y, get_colour(0, 0, 0, 255));
+			y++;
+		}
+		y = 0;
 		x++;
 	}
 }

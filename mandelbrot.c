@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:37:30 by sschelti          #+#    #+#             */
-/*   Updated: 2023/01/30 16:59:36 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:38:42 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@ void	calculate_absolute(mlx_image_t *img, int x, int y)
 	c = cx + cy * I;
 	z = 0 + 0 * I;
 	i = 0;
-	while (i != MAX_ITERATIONS)
+	while (i != MAX_ITERATIONS && cabs(z) < 2)
 	{
 		z = (z * z) + c;
+		if (cabs(z) > 2)
+			mlx_put_pixel(img, x, y, colour_sort(i));
 		i++;
 	}
-	if (cabs(z) < 2)
-		mlx_put_pixel(img, x, y, get_colour(255, 0, 0, 255));
-	else
-		mlx_put_pixel(img, x, y, get_colour(0, 0, 0, 0));
 }
 
 void	mandelbrot(mlx_image_t *img)
@@ -43,30 +41,12 @@ void	mandelbrot(mlx_image_t *img)
 
 	x = 0;
 	y = 0;
+	set_background(img);
 	while (x != WIDTH)
 	{
 		while (y != HEIGHT)
 		{
 			calculate_absolute(img, x, y);
-			y++;
-		}
-		y = 0;
-		x++;
-	}
-}
-
-void	set_background(mlx_image_t *img)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (x != WIDTH)
-	{
-		while (y != HEIGHT)
-		{
-			mlx_put_pixel(img, x, y, get_colour(0, 0, 0, 255));
 			y++;
 		}
 		y = 0;

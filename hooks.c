@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:16:52 by sschelti          #+#    #+#             */
-/*   Updated: 2023/01/31 15:37:11 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/02/03 17:30:24 by stijn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,32 @@ void	scroll_func(double x, double y, void *param)
 	if (y > 0)
 	{
 		var->zoom *= 0.9;
-		mandelbrot(var);
+		select_pixel(var);
 	}
 	else if (y < 0)
 	{
 		var->zoom *= 1.1;
-		mandelbrot(var);
+		select_pixel(var);
 	}
+}
+
+void	key_hook(void *param)
+{
+	t_var	*var;
+
+	var = param;
+	if (mlx_is_key_down(var->mlx, MLX_KEY_ESCAPE))
+	{
+		mlx_close_window(var->mlx);
+		exit(EXIT_SUCCESS);
+	}
+	if (mlx_is_key_down(var->mlx, MLX_KEY_W))
+		var->nav_y -= 0.2 * var->zoom;
+	if (mlx_is_key_down(var->mlx, MLX_KEY_A))
+		var->nav_x -= 0.2 * var->zoom;
+	if (mlx_is_key_down(var->mlx, MLX_KEY_S))
+		var->nav_y += 0.2 * var->zoom;
+	if (mlx_is_key_down(var->mlx, MLX_KEY_D))
+		var->nav_x += 0.2 * var->zoom;
+	select_pixel(var);
 }

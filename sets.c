@@ -6,7 +6,7 @@
 /*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:37:30 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/03 18:36:14 by stijn            ###   ########.fr       */
+/*   Updated: 2023/02/03 18:39:46 by stijn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	mandelbrot(int x, int y, t_var *var)
 	}
 }
 
-void	julia(int x, int y, t_var *var, )
+void	julia(int x, int y, t_var *var)
 {
 	long double			zx;
 	long double			zy;

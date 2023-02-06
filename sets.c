@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sets.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 13:37:30 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/03 18:39:46 by stijn            ###   ########.fr       */
+/*   Updated: 2023/02/06 17:37:15 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	mandelbrot(int x, int y, t_var *var)
 {
-	long double			cx;
-	long double			cy;
-	long double complex	c;
-	long double complex	z;
-	int					i;
+	double			cx;
+	double			cy;
+	double complex	c;
+	double complex	z;
+	int				i;
 
 	cx = var->nav_x + x * ((double)4 * var->zoom / WIDTH) - (2 * var->zoom);
 	cy = var->nav_y + y * ((double)4 * var->zoom / HEIGHT) - (2 * var->zoom);
@@ -36,15 +36,15 @@ void	mandelbrot(int x, int y, t_var *var)
 
 void	julia(int x, int y, t_var *var)
 {
-	long double			zx;
-	long double			zy;
-	long double complex	c;
-	long double complex	z;
-	int					i;
+	double			zx;
+	double			zy;
+	double complex	c;
+	double complex	z;
+	int				i;
 
 	zx = var->nav_x + x * ((double)4 * var->zoom / WIDTH) - (2 * var->zoom);
 	zy = var->nav_y + y * ((double)4 * var->zoom / HEIGHT) - (2 * var->zoom);
-	c = -1 + 0 * I;
+	c = var->julia_x + var->julia_y * I;
 	z = zx + zy * I;
 	i = 0;
 	while (i != MAX_ITERATIONS && cabs(z) < 2)
@@ -70,12 +70,11 @@ void	select_pixel(t_var *var)
 		{
 			if (ft_strncmp(var->set, "julia", 5) == 0)
 				julia(x, y, var);
-			else
+			else if (ft_strncmp(var->set, "mandelbrot", 10) == 0)
 				mandelbrot(x, y, var);
 			y++;
 		}
 		y = 0;
 		x++;
 	}
-
 }

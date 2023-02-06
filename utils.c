@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 12:22:14 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/03 17:59:47 by stijn            ###   ########.fr       */
+/*   Updated: 2023/02/06 19:20:28 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ uint32_t	color_gradient(int i)
 	percentage = (double)i / MAX_ITERATIONS;
 	if (percentage < 0.5)
 		red = (double)i / ((double)MAX_ITERATIONS * 0.5) * 200 + 55;
-	if (percentage > 0.5)
+	else
 	{
 		red = 255;
 		green = ((double)i - half) / (double)MAX_ITERATIONS * 200 + 55;
@@ -58,10 +58,10 @@ void	set_background(mlx_image_t *img)
 
 t_var	*set_variables(void)
 {
-	t_var 			*var;
+	t_var			*var;
 	mlx_t			*mlx;
 	mlx_image_t		*img;
-	
+
 	mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
 	if (!mlx)
 		exit(EXIT_FAILURE);
@@ -77,18 +77,4 @@ t_var	*set_variables(void)
 	var->img = img;
 	var->mlx = mlx;
 	return (var);
-}
-
-void	select_set(char **argv, t_var *var)
-{
-	if (ft_strncmp(argv[1], "mandelbrot", 10) == 0)
-		var->set = "mandelbrot";
-	else if ((ft_strncmp(argv[1], "julia", 5) == 0))
-		var->set = "julia";
-	else
-	{
-		write (1, "incorrect input\n", 16);
-		exit (EXIT_SUCCESS);
-	}
-	
 }

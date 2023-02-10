@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:18:11 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/06 18:57:37 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:06:08 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <complex.h>
 # include "lib/MLX42/include/MLX42/MLX42.h"
 # include "lib/libft/libft.h"
-# define WIDTH 512
-# define HEIGHT 512
+# define WIDTH 400
+# define HEIGHT 400
 # define MAX_ITERATIONS 100
 
 typedef struct s_var {
@@ -46,5 +46,6 @@ char		*select_set(char **argv, int argc, t_var *var);
 void		scroll_func(double x, double y, void *param);
 double		ft_atof(char *str);
 void		check_input(int argc, char **argv);
+void		check_param(char **argv);
 
 #endif

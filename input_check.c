@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:39:51 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/06 19:22:22 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:45:36 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,52 @@
 
 void	check_input(int argc, char **argv)
 {
-	if (argc <= 1 || (argc == 2 && ft_strncmp(argv[1], "mandelbrot", 10) != 0)
-		|| (argc == 4 && ft_strncmp(argv[1], "julia", 5) != 0))
+	if (argc > 4)
 	{
-		write (1, "please select the mandelbrot set or julia set", 46);
+		write (1, "To many arguments, select mandelbrot or julia\n", 47);
+		write (1, "Julia set should have two parameters between -2 and 2\n", 55);
+		exit (EXIT_FAILURE);
+	}
+	if (argc == 1 || (argc == 2 && (ft_strncmp(argv[1], "mandelbrot", 10) != 0))
+		|| argc == 3 || (argc == 4 && (ft_strncmp(argv[1], "julia", 5)) != 0))
+	{
+		write (1, "please select the mandelbrot set or julia set\n", 46);
+		write (1, "Julia set should have two parameters between -2 and 2\n", 55);
 		exit (EXIT_FAILURE);
 	}
 	if (argc == 4 && ft_strncmp(argv[1], "julia", 5) == 0)
 	{
+		check_param(argv);
 		if (ft_atoi(argv[2]) > 2 || ft_atoi(argv[2]) < -2
 			|| ft_atoi(argv[3]) > 2 || ft_atoi(argv[3]) < -2)
 		{
-			write (1, "input should be between -2 and 2\n", 33);
+			write (1, "parameters should be between -2.0 and 2.0\n", 43);
 			exit (EXIT_FAILURE);
 		}
+	}
+}
+
+void	check_param(char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 2;
+	j = 0;
+	while (i != 4)
+	{
+		while (argv[i][j])
+		{
+			if (ft_isdigit(argv[i][j]) == 0 && (argv[i][j] != '.'
+				&& argv[i][j] != '-'))
+			{
+				write (1, "parameters should be between -2.0 and 2.0\n", 43);
+				exit (EXIT_FAILURE);
+			}
+			j++;
+		}
+		j = 0;
+		i++;
 	}
 }
 
@@ -54,8 +86,11 @@ double	ft_atof(char *str)
 	ret = 0.0;
 	i = 0;
 	neg = 1;
-	if (*str++ == '-')
+	if (*str == '-')
+	{
 		neg = -1;
+		str++;
+	}
 	while (ft_isdigit(*str) == 1 && *str)
 		ret = (ret * 10 + (*str++ - '0'));
 	if (*str == '.')
@@ -67,6 +102,5 @@ double	ft_atof(char *str)
 	}
 	while (i-- != 0)
 		ret = ret / 10;
-	printf("%f\n", ret);
 	return (ret *= neg);
 }

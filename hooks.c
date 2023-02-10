@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:16:52 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/03 17:30:24 by stijn            ###   ########.fr       */
+/*   Updated: 2023/02/10 14:36:30 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ void	key_hook(void *param)
 
 	var = param;
 	if (mlx_is_key_down(var->mlx, MLX_KEY_ESCAPE))
-	{
 		mlx_close_window(var->mlx);
-		exit(EXIT_SUCCESS);
-	}
 	if (mlx_is_key_down(var->mlx, MLX_KEY_W))
 		var->nav_y -= 0.2 * var->zoom;
 	if (mlx_is_key_down(var->mlx, MLX_KEY_A))

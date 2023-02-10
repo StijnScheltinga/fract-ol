@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:54:46 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/06 18:57:30 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:36:50 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ int	display_set(char **argv, int argc)
 	mlx_scroll_hook(var->mlx, &scroll_func, var);
 	mlx_loop_hook(var->mlx, &key_hook, var);
 	mlx_loop(var->mlx);
+	mlx_terminate(var->mlx);
 	exit (EXIT_SUCCESS);
 }
 
 int	main(int argc, char	**argv)
 {
 	check_input(argc, argv);
-	if (argc >= 2)	
-		return (display_set(argv, argc));
-	else
-		return (0);
+	return (display_set(argv, argc));
 }

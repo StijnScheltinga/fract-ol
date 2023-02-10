@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:18:11 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/10 14:06:08 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:40:05 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include <complex.h>
+# include <math.h>
 # include "lib/MLX42/include/MLX42/MLX42.h"
 # include "lib/libft/libft.h"
 # define WIDTH 400
 # define HEIGHT 400
 # define MAX_ITERATIONS 100
 
+//general info
 typedef struct s_var {
 	double		zoom;
 	double		nav_x;
@@ -32,6 +33,12 @@ typedef struct s_var {
 	mlx_image_t	*img;
 	char		*set;
 }	t_var;
+
+//complex struct
+typedef struct s_complex {
+	double	real;
+	double	imaginary;
+}	t_complex;
 
 uint32_t	get_colour(int r, int g, int b, int a);
 uint32_t	color_gradient(int i);
@@ -47,5 +54,8 @@ void		scroll_func(double x, double y, void *param);
 double		ft_atof(char *str);
 void		check_input(int argc, char **argv);
 void		check_param(char **argv);
+t_complex	complex_multiply(t_complex num1, t_complex num2);
+t_complex	complex_add(t_complex num1, t_complex num2);
+double		complex_absolute(t_complex num1);
 
 #endif

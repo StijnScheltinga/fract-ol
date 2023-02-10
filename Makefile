@@ -1,4 +1,4 @@
-SOURCES	=	main.c utils.c sets.c hooks.c input_check.c
+SOURCES	=	main.c utils.c sets.c hooks.c input_check.c complex_functions.c
 OBJECTS	=	$(addprefix $(BUILD)/, $(SOURCES:.c=.o))
 NAME	=	fractol
 CC		=	gcc

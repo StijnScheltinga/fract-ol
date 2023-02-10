@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:16:52 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/10 14:36:30 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:12:16 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	scroll_func(double x, double y, void *param)
 	var = param;
 	if (y > 0)
 	{
-		var->zoom *= 0.9;
+		var->zoom *= 0.8;
 		select_pixel(var);
 	}
 	else if (y < 0)
 	{
-		var->zoom *= 1.1;
+		var->zoom *= 1.2;
 		select_pixel(var);
 	}
 }

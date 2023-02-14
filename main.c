@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:54:46 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/10 14:36:50 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/02/13 20:39:05 by stijn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	leaks(void)
+{
+	system("leaks fractol");
+}
 
 int	display_set(char **argv, int argc)
 {
@@ -29,6 +34,7 @@ int	display_set(char **argv, int argc)
 
 int	main(int argc, char	**argv)
 {
+	atexit(leaks);
 	check_input(argc, argv);
 	return (display_set(argv, argc));
 }

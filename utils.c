@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 12:22:14 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/06 19:20:28 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/02/13 20:54:25 by stijn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,14 @@ uint32_t	get_colour(int r, int g, int b, int a)
 
 uint32_t	color_gradient(int i)
 {
-	double	red;
-	double	green;
-	double	percentage;
-	int		half;
+	int	red;
+	int	green;
+	int blue;
 
-	green = 0;
-	half = 0.5 * MAX_ITERATIONS;
-	percentage = (double)i / MAX_ITERATIONS;
-	if (percentage < 0.5)
-		red = (double)i / ((double)MAX_ITERATIONS * 0.5) * 200 + 55;
-	else
-	{
-		red = 255;
-		green = ((double)i - half) / (double)MAX_ITERATIONS * 200 + 55;
-	}
-	return (get_colour((int)red, (int)green, 0, 255));
+	red = (i * 4) % 256;
+	green = i % 256;
+	blue = (i * 2) % 256;
+	return (get_colour(red, green, blue, 255));
 }
 
 void	set_background(mlx_image_t *img)

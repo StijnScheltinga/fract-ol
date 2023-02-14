@@ -5,7 +5,7 @@ CC		=	gcc
 FLAGS	=	-Wall -Werror -Wextra
 BUILD	=	build
 
-LIBS	=	$(MLX)/libmlx42.a -I include -lglfw3 -framework Cocoa -OpenGL -framework IOKit $(LIBFT)/libft.a
+LIBS	=	$(MLX)/libmlx42.a -I lib/MLX42/include/MLX42 -lglfw -L /opt/homebrew/opt/glfw  $(LIBFT)/libft.a
 MLX		=	lib/MLX42
 LIBFT	=	lib/libft
 

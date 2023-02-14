@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:39:51 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/10 14:45:36 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/02/13 20:27:21 by stijn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_input(int argc, char **argv)
 		exit (EXIT_FAILURE);
 	}
 	if (argc == 1 || (argc == 2 && (ft_strncmp(argv[1], "mandelbrot", 10) != 0))
-		|| argc == 3 || (argc == 4 && (ft_strncmp(argv[1], "julia", 5)) != 0))
+		|| (argc >= 3 && (ft_strncmp(argv[1], "julia", 5)) != 0))
 	{
 		write (1, "please select the mandelbrot set or julia set\n", 46);
 		write (1, "Julia set should have two parameters between -2 and 2\n", 55);

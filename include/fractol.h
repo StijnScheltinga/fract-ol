@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:18:11 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/16 10:56:24 by stijn            ###   ########.fr       */
+/*   Updated: 2023/02/16 14:34:7 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 # include <math.h>
-# include "lib/MLX42/include/MLX42/MLX42.h"
-# include "lib/libft/libft.h"
+# include <stdio.h>
+# include "../lib/MLX42/include/MLX42/MLX42.h"
+# include "../lib/libft/libft.h"
 # define WIDTH 400
 # define HEIGHT 400
 # define MAX_ITERATIONS 100
@@ -55,5 +58,6 @@ void		check_param(char **argv);
 t_complex	complex_multiply(t_complex num1, t_complex num2);
 t_complex	complex_add(t_complex num1, t_complex num2);
 double		complex_absolute(t_complex num1);
+void		read_txt(void);
 
 #endif

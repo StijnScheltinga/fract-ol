@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:39:51 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/16 10:48:53 by stijn            ###   ########.fr       */
+/*   Updated: 2023/02/16 15:15:57 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,42 @@
 
 int	check_input(int argc, char **argv)
 {
-	if (argc > 4)
+	if (argc > 4 || argc == 1)
 	{
-		write (1, "To many arguments, select mandelbrot or julia\n", 47);
-		write (1, "Julia set should have two parameters between -2 and 2\n", 55);
+		read_txt();
 		return (0);
 	}
-	else if (argc == 1 || (argc == 2 && (ft_strncmp(argv[1], "mandelbrot", 10) != 0))
-		|| (argc >= 3 && (ft_strncmp(argv[1], "julia", 5)) != 0))
+	else if ((argc == 2 && (ft_strncmp(argv[1], "mandelbrot", 11) != 0))
+		|| (argc >= 3 && (ft_strncmp(argv[1], "julia", 6)) != 0))
 	{
-		write (1, "please select the mandelbrot set or julia set\n", 46);
-		write (1, "Julia set should have two parameters between -2 and 2\n", 55);
+		read_txt();
 		return (0);
 	}
-	else if (argc == 4 && ft_strncmp(argv[1], "julia", 5) == 0)
+	else if (argc == 4 && ft_strncmp(argv[1], "julia", 6) == 0)
 	{
 		check_param(argv);
 		if (ft_atoi(argv[2]) > 2 || ft_atoi(argv[2]) < -2
 			|| ft_atoi(argv[3]) > 2 || ft_atoi(argv[3]) < -2)
 		{
-			write (1, "parameters should be between -2.0 and 2.0\n", 43);
+			read_txt();
 			return (0);
 		}
 	}
-	else
-		return (1);
+	return (1);
+}
+
+void	read_txt(void)
+{
+	int		fd;
+	char	buff[295];
+
+	fd = open("wrong_input.txt", O_RDONLY);
+	if (fd < 0)
+		exit(EXIT_FAILURE);
+	if (read(fd, buff, 295) < 0)
+		exit(EXIT_FAILURE);
+	write(1, &buff, 295);
+	close(fd);
 }
 
 void	check_param(char **argv)
@@ -55,7 +66,7 @@ void	check_param(char **argv)
 			if (ft_isdigit(argv[i][j]) == 0 && (argv[i][j] != '.'
 				&& argv[i][j] != '-'))
 			{
-				write (1, "parameters should be between -2.0 and 2.0\n", 43);
+				read_txt();
 				exit (EXIT_FAILURE);
 			}
 			j++;
@@ -73,36 +84,9 @@ char	*select_set(char **argv, int argc, t_var *var)
 	{
 		var->julia_x = ft_atof(argv[2]);
 		var->julia_y = ft_atof(argv[3]);
+		printf("%f\n%f\n", var->julia_x, var->julia_y);
 		return ("julia");
 	}
-	write (1, "incorrect input\n", 16);
+	read_txt();
 	exit (EXIT_FAILURE);
-}
-
-double	ft_atof(char *str)
-{
-	double	ret;
-	int		i;
-	int		neg;
-
-	ret = 0.0;
-	i = 0;
-	neg = 1;
-	if (*str == '-')
-	{
-		neg = -1;
-		str++;
-	}
-	while (ft_isdigit(*str) == 1 && *str)
-		ret = (ret * 10 + (*str++ - '0'));
-	if (*str == '.')
-		str++;
-	while (ft_isdigit(*str) == 1 && *str)
-	{
-		ret = (ret * 10 + (*str++ - '0'));
-		i++;
-	}
-	while (i-- != 0)
-		ret = ret / 10;
-	return (ret *= neg);
 }

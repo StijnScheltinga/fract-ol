@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 12:22:14 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/16 11:12:13 by stijn            ###   ########.fr       */
+/*   Updated: 2023/02/16 14:12:39 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ uint32_t	color_gradient(int i)
 {
 	int	red;
 	int	green;
-	int blue;
+	int	blue;
 
-	red = i % 256;
-	green = i % 256;
-	blue = i % 256;
+	red = 0;
+	green = (i * 10) % 256;
+	blue = (i * 5) % 256;
 	return (get_colour(red, green, blue, 255));
 }
 
@@ -40,7 +40,7 @@ void	set_background(mlx_image_t *img)
 	{
 		while (y != HEIGHT)
 		{
-			mlx_put_pixel(img, x, y, get_colour(100, 100, 100, 255));
+			mlx_put_pixel(img, x, y, get_colour(0, 0, 0, 255));
 			y++;
 		}
 		y = 0;
@@ -69,4 +69,32 @@ t_var	*set_variables(void)
 	var->img = img;
 	var->mlx = mlx;
 	return (var);
+}
+
+double	ft_atof(char *str)
+{
+	double	ret;
+	int		i;
+	int		neg;
+
+	ret = 0.0;
+	i = 0;
+	neg = 1;
+	if (*str == '-')
+	{
+		neg = -1;
+		str++;
+	}
+	while (ft_isdigit(*str) == 1 && *str)
+		ret = (ret * 10 + (*str++ - '0'));
+	if (*str == '.')
+		str++;
+	while (ft_isdigit(*str) == 1 && *str)
+	{
+		ret = (ret * 10 + (*str++ - '0'));
+		i++;
+	}
+	while (i-- != 0)
+		ret = ret / 10;
+	return (ret *= neg);
 }

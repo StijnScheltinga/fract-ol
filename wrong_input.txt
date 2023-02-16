@@ -1,0 +1,11 @@
+Wrong input.
+Please select the Mandelbrot or Julia set first.
+For the Julia set, two parameters will be needed as well.
+These parameters are the coordinates.
+coordinates can be any value between 2 and -2.
+
+Example mandelbrot:
+"./fractol mandelbrot"
+
+Example julia:
+"./fractol julia -0.12 0.894"

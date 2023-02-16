@@ -6,37 +6,39 @@
 /*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:39:51 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/13 20:27:21 by stijn            ###   ########.fr       */
+/*   Updated: 2023/02/16 10:48:53 by stijn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	check_input(int argc, char **argv)
+int	check_input(int argc, char **argv)
 {
 	if (argc > 4)
 	{
 		write (1, "To many arguments, select mandelbrot or julia\n", 47);
 		write (1, "Julia set should have two parameters between -2 and 2\n", 55);
-		exit (EXIT_FAILURE);
+		return (0);
 	}
-	if (argc == 1 || (argc == 2 && (ft_strncmp(argv[1], "mandelbrot", 10) != 0))
+	else if (argc == 1 || (argc == 2 && (ft_strncmp(argv[1], "mandelbrot", 10) != 0))
 		|| (argc >= 3 && (ft_strncmp(argv[1], "julia", 5)) != 0))
 	{
 		write (1, "please select the mandelbrot set or julia set\n", 46);
 		write (1, "Julia set should have two parameters between -2 and 2\n", 55);
-		exit (EXIT_FAILURE);
+		return (0);
 	}
-	if (argc == 4 && ft_strncmp(argv[1], "julia", 5) == 0)
+	else if (argc == 4 && ft_strncmp(argv[1], "julia", 5) == 0)
 	{
 		check_param(argv);
 		if (ft_atoi(argv[2]) > 2 || ft_atoi(argv[2]) < -2
 			|| ft_atoi(argv[3]) > 2 || ft_atoi(argv[3]) < -2)
 		{
 			write (1, "parameters should be between -2.0 and 2.0\n", 43);
-			exit (EXIT_FAILURE);
+			return (0);
 		}
 	}
+	else
+		return (1);
 }
 
 void	check_param(char **argv)

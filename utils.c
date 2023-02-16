@@ -6,7 +6,7 @@
 /*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 12:22:14 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/13 20:54:25 by stijn            ###   ########.fr       */
+/*   Updated: 2023/02/16 11:12:13 by stijn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ uint32_t	color_gradient(int i)
 	int	green;
 	int blue;
 
-	red = (i * 4) % 256;
+	red = i % 256;
 	green = i % 256;
-	blue = (i * 2) % 256;
+	blue = i % 256;
 	return (get_colour(red, green, blue, 255));
 }
 
@@ -40,7 +40,7 @@ void	set_background(mlx_image_t *img)
 	{
 		while (y != HEIGHT)
 		{
-			mlx_put_pixel(img, x, y, get_colour(0, 0, 0, 255));
+			mlx_put_pixel(img, x, y, get_colour(100, 100, 100, 255));
 			y++;
 		}
 		y = 0;

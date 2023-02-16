@@ -6,15 +6,13 @@
 /*   By: stijn <stijn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:18:11 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/13 20:56:42 by stijn            ###   ########.fr       */
+/*   Updated: 2023/02/16 10:56:24 by stijn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-
 # include <stdlib.h>
-# include <stdio.h>
 # include <math.h>
 # include "lib/MLX42/include/MLX42/MLX42.h"
 # include "lib/libft/libft.h"
@@ -52,7 +50,7 @@ t_var		*set_variables(void);
 char		*select_set(char **argv, int argc, t_var *var);
 void		scroll_func(double x, double y, void *param);
 double		ft_atof(char *str);
-void		check_input(int argc, char **argv);
+int			check_input(int argc, char **argv);
 void		check_param(char **argv);
 t_complex	complex_multiply(t_complex num1, t_complex num2);
 t_complex	complex_add(t_complex num1, t_complex num2);

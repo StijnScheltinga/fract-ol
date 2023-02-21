@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-# include <stdio.h>
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib/libft/libft.h"
 # define WIDTH 400

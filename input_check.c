@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:39:51 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/16 15:15:57 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/02/21 11:31:59 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ void	read_txt(void)
 	char	buff[295];
 
 	fd = open("wrong_input.txt", O_RDONLY);
-	if (fd < 0)
-		exit(EXIT_FAILURE);
-	if (read(fd, buff, 295) < 0)
+	if (fd < 0 || read(fd, buff, 295) < 0)
 		exit(EXIT_FAILURE);
 	write(1, &buff, 295);
 	close(fd);
@@ -63,8 +61,8 @@ void	check_param(char **argv)
 	{
 		while (argv[i][j])
 		{
-			if (ft_isdigit(argv[i][j]) == 0 && (argv[i][j] != '.'
-				&& argv[i][j] != '-'))
+			if ((ft_isdigit(argv[i][j]) == 0 && (argv[i][j] != '.'
+				&& argv[i][j] != '-')) || (argv[i][j] == '-' && j != 0))
 			{
 				read_txt();
 				exit (EXIT_FAILURE);
@@ -84,7 +82,6 @@ char	*select_set(char **argv, int argc, t_var *var)
 	{
 		var->julia_x = ft_atof(argv[2]);
 		var->julia_y = ft_atof(argv[3]);
-		printf("%f\n%f\n", var->julia_x, var->julia_y);
 		return ("julia");
 	}
 	read_txt();

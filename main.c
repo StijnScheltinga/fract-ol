@@ -6,16 +6,11 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:54:46 by sschelti          #+#    #+#             */
-/*   Updated: 2023/02/16 15:11:40 by sschelti         ###   ########.fr       */
+/*   Updated: 2023/02/21 11:29:53 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void	leaks(void)
-{
-	system("leaks fractol");
-}
 
 int	display_set(char **argv, int argc)
 {
@@ -34,7 +29,6 @@ int	display_set(char **argv, int argc)
 
 int	main(int argc, char	**argv)
 {
-	atexit(leaks);
 	if (check_input(argc, argv) == 0)
 		return (0);
 	return (display_set(argv, argc));
